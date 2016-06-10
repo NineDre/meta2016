@@ -108,8 +108,8 @@ distMatrix<- dist(scale(ted_m))
 ###method=c("single", complete", "average", "mcquitty", "median, "centroid", "ward.D", "ward.D2)
 #fit <- hclust(distMatrix, method="single")
 #fit <- hclust(distMatrix, method="complete")
-fit <- hclust(distMatrix, method="average")
-#fit <- hclust(distMatrix, method="ward.D")
+#fit <- hclust(distMatrix, method="average")
+fit <- hclust(distMatrix, method="ward.D")
 
 
 ###Draw dendrogram
@@ -122,8 +122,9 @@ rect.hclust(fit, k=16)
 ###Save the dendrogram as PNG image file
 #png("./dendrogram_single_20140352.png", width = 1280, height=720)
 #png("./dendrogram_complete_20140352.png", width = 1280, height=720)
-png("./dendrogram_average_20140352.png", width = 1280, height=720)
+#png("./dendrogram_average_20140352.png", width = 1280, height=720)
 #png("./dendrogram_ward.D_20140352.png", width = 1280, height=720)
+png("./dendrogram_All_ward.D_20140352.png", width = 1980, height=1080)
 plot(fit)
 ###k= number of clusters
 rect.hclust(fit, k=16)
@@ -132,7 +133,7 @@ dev.off()
 ###Assign a cluster to a term
 ###cutree {stats} Cut a Tree into Groups of Data
 ###k= number of clusters
-groups <- cutree(fit, k=16)
+groups <- cutree(fit, k=1)
 df_groups <- data.frame(groups)
 str(df_groups)
 df_groups$KWD <- rownames(df_groups)
@@ -141,5 +142,6 @@ str(df_groups)
 ###Write the clustering result to text file
 #write.table(df_groups, "./tc_result_single_20140352.txt", row.names=FALSE, col.names=TRUE, sep="\t")
 #write.table(df_groups, "./tc_result_complete_20140352.txt", row.names=FALSE, col.names=TRUE, sep="\t")
-write.table(df_groups, "./tc_result_average_20140352.txt", row.names=FALSE, col.names=TRUE, sep="\t")
+#write.table(df_groups, "./tc_result_average_20140352.txt", row.names=FALSE, col.names=TRUE, sep="\t")
 #write.table(df_groups, "./tc_result_ward.D_20140352.txt", row.names=FALSE, col.names=TRUE, sep="\t")
+write.table(df_groups, "./tc_result_All_ward.D_20140352.txt", row.names=FALSE, col.names=TRUE, sep="\t")
